@@ -82,6 +82,10 @@ body{
 }
 
 .pageheader{
+
+	p {
+		display: inline;
+	}
 	
 	font-size:	0;
 
@@ -123,6 +127,7 @@ body{
 	}
 
 	.addrs{
+		background-color: red !important;
 		height:$logoheight/2;
 		padding-top: 3mm;
 		color: $grey;
@@ -159,12 +164,13 @@ body{
 		color:		$color-h1-light;
 		display:inline-block;
 		margin:0;
+		font-weight: normal;
 	}
 
 	h2{
 		font-size: 	$header-size-small;
 		color: 		$color-h2;
-		font-weight: bold;
+		font-weight: normal;
 	}
 
 	p{
@@ -216,6 +222,10 @@ $margin-middle: 	8mm;
 		margin-left:0.5mm;
 	}
 
+	&>li:not(:first-child){
+		margin-top: 0.3cm;
+	}
+
 }
  
 .major{
@@ -225,6 +235,14 @@ $margin-middle: 	8mm;
 	
 	.nested{
 		margin-bottom: 5mm;
+	}
+
+	h2 {
+		margin-top: 1mm;
+	}
+
+	ul, li{
+		height: auto;
 	}
 
 	aside{
