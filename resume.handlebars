@@ -1,0 +1,108 @@
+<link rel="stylesheet" href="./template/style_red.css">
+
+<section class="page">
+	<header class="pageheader">
+		<img src="{{style.logo}}"/>
+
+		<section>
+			<h1> {{name.first}} <em>{{name.last}}</em> </h1>
+			<section class="addrs">
+			{{#each address}}
+
+				<address class="{{@key}}">
+					{{{md this}}}
+				</address>
+
+			{{/each}}
+
+			</section>
+		</section>
+	</header>
+
+	{{#*inline "simpleList"}}
+		<li class='simple'>
+			<h1>{{name}}</h1>
+			<ul>
+			{{#each elements as |elem index|}}
+				{{#if elem}}
+				<li>{{{md elem}}}</li>
+				{{/if}}
+			{{/each}}
+			</ul>
+		</li>
+	{{/inline}}
+
+	{{#*inline "detailThing"}}
+		<li class='detail'>
+			<h2>{{name}}</h2>
+			{{#if platform}}
+				<aside class="platform">{{ platform }}</aside>
+			{{/if}}
+			<ul class="info">
+				{{#each info}}
+					<li>{{{this}}}</li>
+				{{/each}}
+			</ul>
+			{{md description}}
+		</li>
+	{{/inline}}
+
+
+	<ul class="minor notes">
+	{{#each minor as |section section_name| }}
+		{{#if-array section}}
+			{{> simpleList 
+				name=section_name
+				elements=section
+			}}
+		{{else}}
+			<li class="nested">
+				<h1>{{section_name}}</h1>
+				<ul>
+				{{#each section as |subsection title|}}
+					{{> detailThing
+						name=title
+						info=subsection.info
+						description=subsection.description
+					}}
+				{{/each}}
+				</ul>
+			</li>
+		{{/if-array}}
+	{{/each}}
+	</ul>
+
+	<ul class="major notes">
+		{{#each major as |section section_name| }}
+			{{#if-array section}}
+				{{> simpleList 
+					name=section_name
+					elements=section
+				}}
+			{{else}}
+				<li class="nested">
+					<h1>{{section_name}}</h1>
+					<ul>
+					{{#each section as |subsection title|}}
+						{{> detailThing
+							name=title
+							info=subsection.info
+							platform=subsection.platform
+							description=subsection.description
+						}}
+					{{/each}}
+					</ul>
+				</li>
+			{{/if-array}}
+		{{/each}}
+	</ul>
+
+	<section class="footer">
+		References available upon request.<br>
+		Full portfolio at
+		<a href="http://huang-hobbs.co#projects">
+			huang-hobbs.co#projects
+		</a>
+	</section>
+
+</section>
